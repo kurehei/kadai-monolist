@@ -1,5 +1,5 @@
 class OwnershipsController < ApplicationController
-  def create
+    def create
     @item = Item.find_or_initialize_by(code: params[:item_code])
     
     unless @item.persisted?
@@ -12,10 +12,16 @@ class OwnershipsController < ApplicationController
     if params[:type] == 'Want'
       current_user.want(@item)
       flash[:success] = '商品をWantしました'
+     end
+    if params[:type] == 'Have'
+      current_user.have(@item)
+      flash[:success] = "商品をHaveしました"
     end
     
     redirect_back(fallback_location: root_path)
-  end
+    
+  
+    end
 
   def destroy
     @item = Item.find(params[:item_id])
@@ -23,8 +29,13 @@ class OwnershipsController < ApplicationController
     if params[:type] == 'Want'
       current_user.unwant(@item)
       flash[:danger] = "商品のWantを解除しました。"
+    end 
+    if params[:type] == 'Have'
+      current_user.unhave(@item)
+      flash[:danger] = "商品のHaveを解除しました。"
     end
-    redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: root_path)
   
   end
+  
 end
