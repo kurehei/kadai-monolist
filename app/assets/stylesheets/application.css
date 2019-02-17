@@ -125,3 +125,12 @@
       .user-profile .status ul li .status-value {
        font-size : 18px;
        }
+   .alert {
+   
+    z-index:2;
+    position:absolute;
+    
+    left:20%;
+    right:20%;
+   }
+   
